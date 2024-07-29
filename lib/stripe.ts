@@ -6,7 +6,7 @@ import { auth } from "@/auth";
 const stripe = new Stripe(
   process.env.STRIPE_SECRET_KEY as string,
 );
-const priceId = "price_1PhVxXG89ehGgt5xTu4MZWRI";
+const priceId = "price_1PhoezG89ehGgt5x8VTtArSd";
 
 // Create a function to generate checkout link
 export const createCheckoutSession = async ({ email }: { email: string }) => {
@@ -21,8 +21,8 @@ export const createCheckoutSession = async ({ email }: { email: string }) => {
         },
       ],
       mode: "subscription",
-      success_url: `http://localhost:3000/new-product`,
-      cancel_url: `http://localhost:3000/`,
+      success_url: `https://desi-founders.vercel.app/new-product`,
+      cancel_url: `https://desi-founders.vercel.app`,
     });
 
     return { url: session.url };
@@ -66,7 +66,7 @@ export const createCustomerLink = async () => {
 
     const portal = await stripe.billingPortal.sessions.create({
       customer: customer.id,
-      return_url: `http://localhost:3000/my-products`,
+      return_url: `https://desi-founders.vercel.app/my-products`,
     });
 
     return portal.url;
